@@ -1,0 +1,55 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ASD_GRAPH_HPP	Graph.hpp	19;"	d
+CC	makefile	/^CC=g++$/;"	m
+CFLAGS	makefile	/^CFLAGS=-std=c++11 -Wall -c$/;"	m
+Graph	Graph.hpp	/^Graph<T>::Graph() {}$/;"	f	class:Graph
+Graph	Graph.hpp	/^Graph<T>::Graph(Graph& other)$/;"	f	class:Graph
+Graph	Graph.hpp	/^Graph<T>::Graph(std::initializer_list<T> list)  \/\/initializer constructor$/;"	f	class:Graph
+Graph	Graph.hpp	/^class Graph$/;"	c
+HEADFILES	makefile	/^HEADFILES=$(wildcard *.hpp)$/;"	m
+LD	makefile	/^LD=g++$/;"	m
+LDFLAGS	makefile	/^LDFLAGS=$/;"	m
+Node	Graph.hpp	/^		Node(T value_) :$/;"	f	struct:Graph::Node
+Node	Graph.hpp	/^		Node(T value_, vt neighbours_) :$/;"	f	struct:Graph::Node
+Node	Graph.hpp	/^	struct Node$/;"	s	class:Graph
+OBJFILES	makefile	/^OBJFILES=$(patsubst %.cpp, %.o, ${SRCFILES})$/;"	m
+SRCFILES	makefile	/^SRCFILES=$(wildcard *.cpp)$/;"	m
+TARGET	makefile	/^TARGET=test$/;"	m
+access_vert	Graph.hpp	/^typename Graph<T>::Node* Graph<T>::access_vert(T v)     \/\/allows to operate on nodes only with T value$/;"	f	class:Graph
+add_edge	Graph.hpp	/^bool Graph<T>::add_edge(T v, T u)$/;"	f	class:Graph
+add_vert	Graph.hpp	/^void Graph<T>::add_vert(T v)$/;"	f	class:Graph
+biconnected_comp	Graph.hpp	/^typename Graph<T>::vvt Graph<T>::biconnected_comp()$/;"	f	class:Graph
+check_cycle	Graph.hpp	/^bool Graph<T>::check_cycle(T v)$/;"	f	class:Graph
+check_directed	Graph.hpp	/^bool Graph<T>::check_directed()$/;"	f	class:Graph
+connected_comp	Graph.hpp	/^typename Graph<T>::vvt Graph<T>::connected_comp()$/;"	f	class:Graph
+cut_vertices	Graph.hpp	/^std::vector<T> Graph<T>::cut_vertices()$/;"	f	class:Graph
+d	Graph.hpp	/^		int d;$/;"	m	struct:Graph::Node
+del_edge	Graph.hpp	/^bool Graph<T>::del_edge(T v, T u)$/;"	f	class:Graph
+del_vert	Graph.hpp	/^bool Graph<T>::del_vert(T v)$/;"	f	class:Graph
+find_vert	Graph.hpp	/^bool Graph<T>::find_vert(T v)$/;"	f	class:Graph
+get_index	Graph.hpp	/^int Graph<T>::get_index(T v)$/;"	f	class:Graph
+low	Graph.hpp	/^		int low;$/;"	m	struct:Graph::Node
+main	source.cpp	/^int main()$/;"	f
+neigh_num	Graph.hpp	/^size_t Graph<T>::neigh_num(T v)$/;"	f	class:Graph
+neighbours	Graph.hpp	/^		vt neighbours;                  \/\/ List of neighbours$/;"	m	struct:Graph::Node
+node_list	Graph.hpp	/^	vn node_list;                       \/\/ main list of vertices$/;"	m	class:Graph
+operator []	Graph.hpp	/^std::vector<T> Graph<T>::operator[](T v)$/;"	f	class:Graph
+out_arcs	Graph.hpp	/^typename std::vector<T> & Graph<T>::out_arcs(int v)     \/\/ returns list of outgoing arcs from v$/;"	f	class:Graph
+previous	Graph.hpp	/^		Node* previous;                 \/\/ Pointer to previous node. Used in biconnected_comp().$/;"	m	struct:Graph::Node
+print_edges	Graph.hpp	/^void Graph<T>::print_edges()$/;"	f	class:Graph
+print_stack	Graph.hpp	/^void print_stack(std::stack<T> hue)$/;"	f
+print_verts	Graph.hpp	/^void Graph<T>::print_verts()$/;"	f	class:Graph
+value	Graph.hpp	/^		T value;                        \/\/ Value on vertex$/;"	m	struct:Graph::Node
+vert_directed	Graph.hpp	/^bool Graph<T>::vert_directed(T v)  \/\/ not-working-properly$/;"	f	class:Graph
+vert_num	Graph.hpp	/^size_t Graph<T>::vert_num()$/;"	f	class:Graph
+visited	Graph.hpp	/^		bool visited;                   \/\/ True if vertex was visited during the function execution$/;"	m	struct:Graph::Node
+vn	Graph.hpp	/^	typedef std::vector<Node> vn;$/;"	t	class:Graph
+vt	Graph.hpp	/^	typedef std::vector<T> vt;$/;"	t	class:Graph
+vvt	Graph.hpp	/^	typedef std::vector< std::vector<T> > vvt;$/;"	t	class:Graph
+zero_visited	Graph.hpp	/^void Graph<T>::zero_visited()$/;"	f	class:Graph
+~Graph	Graph.hpp	/^Graph<T>::~Graph() {}$/;"	f	class:Graph

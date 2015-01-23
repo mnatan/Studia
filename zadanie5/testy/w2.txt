@@ -1,0 +1,13 @@
+  8  = liczba punktow
+ A: (  0.00 ,  8.00 )
+ B: (  2.00 ,  8.00 )
+ C: (  3.00 ,  0.00 )
+ D: (  4.00 ,  8.00 )
+ E: (  6.00 ,  8.00 )
+ F: (  7.00 ,  0.00 )
+ G: (  8.00 ,  8.00 )
+ H: ( 10.00 ,  8.00 )
+przez wszystkie w jedna strone
+ ABCDEFGHA -->   48.249
+===WYNIK===
+ABDEGH+ACFH ->  10.0 +  21.1 =   31.09

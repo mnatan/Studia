@@ -1,0 +1,12 @@
+  7  = liczba punktow
+ A: (  0.00 ,  6.00 )
+ B: (  1.00 ,  0.00 )
+ C: (  2.00 ,  3.00 )
+ D: (  5.00 ,  4.00 )
+ E: (  6.00 ,  1.00 )
+ F: (  7.00 ,  5.00 )
+ G: (  8.00 ,  2.00 )
+przez wszystkie w jedna strone
+ ABCDEFGA -->   31.799
+===WYNIK===
+ABEG+ACDFG ->  13.4 +  12.2 =   25.58

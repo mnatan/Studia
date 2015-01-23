@@ -1,0 +1,33 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	makefile	/^CC=g++$/;"	m
+CFLAGS	makefile	/^CFLAGS=-std=c++11 -Wall -c$/;"	m
+HEADFILES	makefile	/^HEADFILES=$(wildcard *.hpp)$/;"	m
+LD	makefile	/^LD=g++$/;"	m
+LDFLAGS	makefile	/^LDFLAGS=$/;"	m
+OBJFILES	makefile	/^OBJFILES=$(patsubst %.cpp, %.o, ${SRCFILES})$/;"	m
+POINT	Point.hpp	2;"	d
+Point	Point.hpp	/^	Point() : x(0), y(0), label('Z') {}                 \/\/konstruktor domyslny tworzy 0,0,Z$/;"	f	struct:Point
+Point	Point.hpp	/^	Point(float x_, float y_, char l_) : x(x_), y(y_), label(l_) {}$/;"	f	struct:Point
+Point	Point.hpp	/^struct Point$/;"	s
+SRCFILES	makefile	/^SRCFILES=$(wildcard *.cpp)$/;"	m
+TARGET	makefile	/^TARGET=test$/;"	m
+app	Point.hpp	/^	droga app(Point x)$/;"	f	struct:droga
+dist	Point.hpp	/^float dist(const Point lhs, const Point rhs)$/;"	f
+dlugosc	Point.hpp	/^	float dlugosc;$/;"	m	struct:droga
+droga	Point.hpp	/^	droga(float dl, std::vector<Point> list) : dlugosc(dl), lista(list) {};$/;"	f	struct:droga
+droga	Point.hpp	/^struct droga$/;"	s
+label	Point.hpp	/^	char label;$/;"	m	struct:Point
+lista	Point.hpp	/^	std::vector<Point> lista;$/;"	m	struct:droga
+main	main.cpp	/^int main()$/;"	f
+najkrotszy_bitonic	Point.hpp	/^droga najkrotszy_bitonic(std::vector<Point> lista)$/;"	f
+operator <<	Point.hpp	/^std::ostream & operator << (std::ostream& out, const Point p)$/;"	f
+prep	Point.hpp	/^	droga prep(Point x)$/;"	f	struct:droga
+vvP	Point.hpp	/^typedef std::vector<std::vector<Point>> vvP;$/;"	t
+wywal_powtorzenia	Point.hpp	/^void wywal_powtorzenia(std::vector<droga> & lista)$/;"	f
+x	Point.hpp	/^	float x;                                \/\/koordynat x$/;"	m	struct:Point
+y	Point.hpp	/^	float y;                                \/\/koordynat y$/;"	m	struct:Point

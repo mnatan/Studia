@@ -1,0 +1,12 @@
+#wszystkie kompilowane pliki 
+*.gch
+*.o
+*.elf
+*.slo
+*.lo
+*.o
+*.so
+*.dylib
+*.lai
+*.la
+*.a

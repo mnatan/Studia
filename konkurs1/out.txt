@@ -1,0 +1,7 @@
+ile liczb pierwszych w danym przedziale?
+czas dwu algorytmow
+A3: n niepodz: 2,3,5 -> 48*sqrt(n)/210 dz.
+A4: nie znajduje pewnych pseudopierwszych
+30<=lkp<=rkp<=1000000000000000000=10^18
+
+lewy  koniec przedzialu = prawy koniec przedzialu = dlugosc prz

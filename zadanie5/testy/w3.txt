@@ -1,0 +1,14 @@
+  9  = liczba punktow
+ A: (  0.00 ,  8.00 )
+ B: (  2.00 ,  8.00 )
+ C: (  3.00 ,  0.00 )
+ D: (  4.00 ,  8.00 )
+ E: (  5.00 ,  4.00 )
+ F: (  6.00 ,  8.00 )
+ G: (  7.00 ,  0.00 )
+ H: (  8.00 ,  8.00 )
+ I: ( 10.00 ,  8.00 )
+przez wszystkie w jedna strone
+ ABCDEFGHIA -->   54.495
+===WYNIK===
+ABDFHI+ACEGI ->  10.0 +  26.0 =   36.03

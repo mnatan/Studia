@@ -17,7 +17,7 @@ struct Point {
 
 bool operator== (const Point& a, const Point& b)
 {
-	// We assume labels are unique
+	// We assume the labels are unique
 	return a.label == b.label;
 }
 

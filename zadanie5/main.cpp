@@ -4,45 +4,40 @@
 
 int main()
 {
-	//wczytaj punkty
 	int number_of_points;
-	scanf("%d", &number_of_points);
-	printf("  %d  = liczba puntow\n", number_of_points);
-	std::vector<Point> punkty;
-	float x;
-	float y;
+	std::cin >> number_of_points;
+	std::cout << "  " << number_of_points << " = liczba puntow\n";
+	std::vector<Point> points;
+	float x, y;
 	char label = 'A';
-	for (int i = 0; i < number_of_points; i++)
-	{
-		scanf("%f%f", &x, &y);
-		punkty.push_back(Point(x, y, label));
+	for (int i = 0; i < number_of_points; i++) {
+		std::cin >> x >> y;
+		points.push_back(Point(x, y, label));
 		std::cout << Point(x, y, label) << std::endl;
-		label++;
+		++label;
 	}
 
-	printf("przez wszystkie w jedna strone\n ");
-	float prosto;
-	auto end = punkty.end();
+	std::cout << "przez wszystkie w jedna strone\n ";
+	float straight;
+	auto end = points.end();
 	--end;
-	for (auto it = punkty.begin(); it != end;)
-	{
-		printf("%c", (*it).label);
-		prosto += dist(*it, *(it+1));
+	for (auto it = points.begin(); it != end;) {
+		std::cout << it->label;
+		straight += dist(*it, *(it+1));
 		++it;
 	}
-	printf("A");
-	prosto += dist(punkty[0], punkty.back());
-	printf(" -->   %6.2f\n",prosto);
+	std::cout << "A";
+	straight += dist(points[0], points.back());
+	printf(" -->   %6.2f\n",straight);
 
-	//oblicz najkrotsza sciezke
-	auto wynik = najkrotszy_bitonic(punkty);
+	// Calculate the shortest bitonic tour
+	auto result = optimal_bitonic_tour(points);
 	std::cout << "===WYNIK===" << std::endl;
-	for (auto x : wynik.kolejnosc)
-	{
+	for (auto x : result.order)
 		std::cout << x.label;
-	}
-	std::cout << wynik.kolejnosc[0].label;
-	std::cout << ", dlugosc = " << wynik.dlugosc + dist(wynik.kolejnosc[0], wynik.kolejnosc.back()) << std::endl;
+	std::cout << result.order[0].label;
+	std::cout << ", length = " <<
+		result.length + dist(result.order[0], result.order.back()) << '\n';
 
 	return 0;
 }

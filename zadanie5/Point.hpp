@@ -7,141 +7,116 @@
 #include <iostream>
 #include <cstdio>
 
-struct Point
-{
-	float x;                                //koordynat x
-	float y;                                //koordynat y
+struct Point {
+	float x, y;
 	char label;
 
-	Point() : x(0), y(0), label('Z') {}                 //konstruktor domyslny tworzy 0,0,Z
-	Point(float x_, float y_, char l_) : x(x_), y(y_), label(l_) {}
-
-	friend std::ostream & operator << (std::ostream& out, const Point p);
+	Point() : x (0), y (0), label ('0') {}
+	Point (float nx, float ny, char nlabel) : x (nx), y (ny), label (nlabel) {}
 };
 
-std::ostream & operator << (std::ostream& out, const Point p)
+bool operator== (const Point& a, const Point& b)
 {
-	printf(" %c: (%6.2f , %6.2f)",p.label,p.x,p.y);
-	return out;
+	// We assume labels are unique
+	return a.label == b.label;
 }
 
-float dist(const Point lhs, const Point rhs)
+std::ostream& operator << (std::ostream& out, const Point& p)
 {
-	return sqrt(
-	           (rhs.x - lhs.x) * (rhs.x - lhs.x) +
-	           (rhs.y - lhs.y) * (rhs.y - lhs.y)
-	       );
+	return out << " " << p.label << ": ( " << p.x << " , " << p.y << ")";
 }
 
-struct droga
+float dist (const Point lhs, const Point rhs)
 {
-	float dlugosc;
-	std::vector<Point> kolejnosc;
+	float x_diff = rhs.x - lhs.x;
+	float y_diff = rhs.y - lhs.y;
+	return sqrt (x_diff * x_diff + y_diff * y_diff);
+}
 
-	droga(float dl, std::vector<Point> list) : dlugosc(dl), kolejnosc(list) {};
+struct Path {
+	float length;
+	std::vector<Point> order;
 
-	droga prep(Point x)
+	Path (float dl, std::vector<Point> list) : length (dl), order (list) {};
+
+	Path prepend (Point x)
 	{
-		droga tmp = *this;
-		tmp.dlugosc += dist(x, tmp.kolejnosc[0]);
-		tmp.kolejnosc.insert(tmp.kolejnosc.begin(), x);
+		Path tmp = *this;
+		tmp.length += dist (x, tmp.order[0]);
+		tmp.order.insert (tmp.order.begin(), x);
 		return tmp;
 	}
-	droga app(Point x)
+	Path append (Point x)
 	{
-		droga tmp = *this;
-		tmp.dlugosc += dist(x, tmp.kolejnosc.back());
-		tmp.kolejnosc.push_back(x);
+		Path tmp = *this;
+		tmp.length += dist (x, tmp.order.back());
+		tmp.order.push_back (x);
 		return tmp;
 	}
-
-	friend std::ostream & operator << (std::ostream& out, const droga p);
 };
 
-std::ostream & operator << (std::ostream& out, const droga d)
+std::ostream& operator << (std::ostream& out, const Path d)
 {
-	out << "droga: ";
-	for (auto x : d.kolejnosc)
-	{
+	out << "Path: ";
+	for (auto x : d.order)
 		out << x.label;
-	}
-	out << ", dlugosc = " << d.dlugosc;
+	out << ", length = " << d.length;
 	return out;
 }
 
-void wywal_powtorzenia(std::vector<droga> & lista)
+inline bool same_endpoints (const Path& a, const Path& b)
 {
-	std::vector<droga> tmp;
-	for ( auto x : lista )
-	{
-		bool good = true;
-		for ( auto y : lista )
-		{
-			if (
-			    (x.kolejnosc[0].label == y.kolejnosc[0].label &&
-			     x.kolejnosc.back().label == y.kolejnosc.back().label)
-			    ||
-			    (x.kolejnosc[0].label == y.kolejnosc.back().label &&
-			     x.kolejnosc.back().label == y.kolejnosc[0].label)
-			)
-			{
-				if (y.dlugosc < x.dlugosc)
-				{
-					good = false;
-					break;
-				}
+	return (a.order[0] == b.order[0] && a.order.back() == b.order.back())
+	       || (a.order[0] == b.order.back() && a.order.back() == b.order[0]);
+}
+
+std::vector<Path> remove_suboptimal (const std::vector<Path>& list)
+{
+	std::vector<Path> tmp;
+	for (auto x : list) {
+		bool x_is_shortest = true;
+		for (auto y : list) {
+			if (same_endpoints (x, y) and (y.length < x.length)) {
+				x_is_shortest = false;
+				break;
 			}
 		}
-		if (good)
-		{
-			tmp.push_back(x);
-		}
+		// If no shorter path with the same endpoints as x was found,
+		// add it to the result
+		if (x_is_shortest)
+			tmp.push_back (x);
 	}
-	lista = tmp;
+	return std::move (tmp);
 }
 
-droga najkrotszy_bitonic(std::vector<Point> lista)
+Path optimal_bitonic_tour (std::vector<Point> list)
 {
-	// zmienne pomocnicze
-	std::vector<droga> R; //wektor wynikowy
-	std::vector<droga> Z; //tmp
+	std::vector<Path> result;
 
 	// init AB
-	R.push_back(
-	    droga(
-	        dist(lista[0], lista[1]), { lista[0], lista[1] }
-	    )
-	);
+	result.push_back (Path (dist (list[0], list[1]), { list[0], list[1] }));
 
-	// algorytm
-	auto i_punkt = lista.begin();
-	++i_punkt;			// skip A i B
-	++i_punkt;
-	for (auto end = lista.end(); i_punkt != end; ++i_punkt)
-	{
-		Z.clear();
-		for (auto i_droga : R)
-		{
-			Z.push_back(i_droga.prep(*i_punkt));
-			Z.push_back(i_droga.app(*i_punkt));
+	// the main algorithm
+	auto i_point = list.begin();
+	i_point += 2; // skip A and B
+	for (auto end = list.end(); i_point != end; ++i_point) {
+		std::vector<Path> TMP;
+		for (auto i_path : result) {
+			TMP.push_back (i_path.prepend (*i_point));
+			TMP.push_back (i_path.append (*i_point));
 		}
-		wywal_powtorzenia(Z);
-		R = Z;
+		result = remove_suboptimal (TMP);
 	}
 
-	std::cout << "Mamy wyniki:" << std::endl;
-	for(auto x: R){
-		for(auto y: x.kolejnosc){
-			std::cout << y.label;
-		}
-		std::cout << " = " << x.dlugosc + dist(x.kolejnosc[0], x.kolejnosc.back()) << std::endl;
-	}
+	//std::cout << "Mamy wyniki:" << std::endl;
+	//for (auto x : result) {
+		//for (auto y : x.order)
+			//std::cout << y.label;
+		//std::cout << " = " << x.length + dist (x.order[0], x.order.back()) << std::endl;
+	//}
 
-	// zwracamy minimalną drogę
-	return *min_element(R.begin(), R.end(), [](droga x, droga y)
-	{
-		return x.dlugosc < y.dlugosc;
-	}); // TODO
+	return *min_element (result.begin(), result.end(),
+	[] (Path x, Path y) { return x.length < y.length; });
 }
 
 #endif
